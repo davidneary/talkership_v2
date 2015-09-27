@@ -1,40 +1,45 @@
-
-    //remove friends helper function
-    Array.prototype.remove = function(value) {
-    var idx = this.indexOf(value);
-    if (idx != -1) {
-        return this.splice(idx, 1); // The second parameter is the number of elements to remove.
-    }
-    return false;
-    }
+// function removerHelp()
+//     //remove friends helper function
+//     Array.prototype.remove = function(value) {
+//     var idx = this.indexOf(value);
+//     if (idx != -1) {
+//         return this.splice(idx, 1); // The second parameter is the number of elements to remove.
+//     }
+//     return false;
+//     }
+/*global array*/
+var array = [];
 
 function killFriend() {
-    var removeFriend =  prompt("Who would you like to remove as a friend?", "Jane Doe");
-    array.remove(removeFriend);
-    
-    
+    var removeFriend =  prompt("Who would you like to remove as a friend?", "Enter name here");
+    var indexRemove = array.indexOf(removeFriend);
+    if (indexRemove > -1) {
+        array.splice(indexRemove, 1);
+    }
+    document.getElementById("demo").innerHTML = "";
+    console.log(array)
     //refresh the page so that the friend is no longer displayed
 
 }
 
 
-function setPromptTime() {
-    //prompt the user for the number of days they would like
-    //before getting a notification 
-}
 
 function getLastInteraction() {
     //get and add the date of the last interaction between user and friend
 }
-
+/*global UNIXnumDays */
+var UNIXnumDays;
 function promptsForDays() {
+    
     var numDays = prompt("Please enter number of days before prompting", "Days...");
-    }
+    UNIXnumDays = (24*60*60)*numDays;
+    console.log("Send prompt in "+UNIXnumDays+" seconds");
+    return UNIXnumDays;
+}
     //convert numDays into MJD
     //assign promptTime to friend
 
-/*global array*/
-var array = [];
+
 
     
     //math converter from UNIX
@@ -50,4 +55,6 @@ var array = [];
         var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
         return time;
 }
+
+
     

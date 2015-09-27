@@ -28,16 +28,19 @@
 	
 	<div class="col span_1_of_4">
 	Date of Last Contact
+	<div class="dateList"> <ul id="time"></ul>
+	</div>
 	</div>
 	<div class="col span_1_of_4">
 	Time Before Prompting
+	<button onclick="notifyMe()">It's been too long!</button>
 	</div>
 	<div class="col span_1_of_4">
 	    Remove Friend?
 	</div>
 	
 	<script>
-	var array = ["eris.he.7", "david.neary.52", "rania.glass"];
+	/*global array*/
 	function addFriend() {
 	    var newFriend = prompt("Who would you like to add as a friend?", "New friend...");
      	array.push(newFriend);
@@ -46,13 +49,57 @@
             newHTML.push('<li>' + array[i] + '</li>');
         }
         console.log(array);
+        displayTime();
+        //document.write(newHTML)
        // $(".element").html(newHTML.join(""));
         for (var i = 0; i < array.length; i++) {
             document.getElementById("demo").innerHTML = array[i]; 
         }
+        
 	}
+	/* global UNIXnumDays */
+	function displayTime() {
+		document.getElementById("time").innerHTML = (1234*(array[(array.length)-1].length))+" seconds";
+	}
+	
     
 </script>
+<script>
+/*global array*/
+var dateArray = [];
+for (var j = 0; j < array.length; j++) {
+	dateArray.push(j+4);
+}
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  if (Notification.permission !== "granted")
+    Notification.requestPermission();
+});
+
+function notifyMe() {
+  if (!Notification) {
+    alert('Desktop notifications not available in your browser. Try Chromium.'); 
+    return;
+  }
+
+  if (Notification.permission !== "granted")
+    Notification.requestPermission();
+  else {
+    var notification = new Notification('3..2..1.. PING!', {
+      icon: 'smalltalkership.png',
+      body: "It's been a while since you've messaged your friend. You should drop them a line."
+    });
+
+    notification.onclick = function () {
+      window.open("http://facebook.com/messages");      
+    };
+
+  }
+
+}
+</script>
+
 
 
 
@@ -92,5 +139,4 @@
 
 <!--buttons!-->
 <button onclick = "addFriend()"> Add new friend </button>
-
 </html>

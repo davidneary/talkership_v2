@@ -19,6 +19,8 @@ displayed {
     display: block;
     margin-left: 800px;
     margin-right: 800px; }
+    
+
 
 .header h1 {
 color: #fff;
@@ -39,7 +41,11 @@ button {
   height: 20px;
 
 }
-
+ul {
+	color: #fff;
+	text-decoration:none;
+	font-size: 14px;
+}
 
 #divClass div b {
 color: #c7e2e4;

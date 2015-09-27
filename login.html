@@ -114,27 +114,23 @@
 <p></p>
 <p></p>
 <center>
-<button onclick="notifyMe()">Notify me!</button>
-</center>
-<p></p>
-<p></p>
-<center>
 <img src="blanketship.jpg" alt="blanketship" style="width:400px; height:400px;">
 </center>
-<script>
-document.querySelector('#show_button').addEventListener('click', function() {
-  if (window.webkitNotifications.checkPermission() == 0) { // 0 is PERMISSION_ALLOWED
-    // function defined in step 2
-    notification_test = window.webkitNotifications.createNotification(
-      'icon.png', 'Notification Title', 'Notification content...');
-    notification_test.ondisplay = function() { ... do something ... };
-    notification_test.onclose = function() { ... do something else ... };
-    notification_test.show();
-  } else {
-    window.webkitNotifications.requestPermission();
-  }
+// <script>
+// document.querySelector('#show_button').addEventListener('click', function() {
+//   if (window.webkitNotifications.checkPermission() == 0) { // 0 is PERMISSION_ALLOWED
+//     // function defined in step 2
+//     notification_test = window.webkitNotifications.createNotification(
+//       'icon.png', 'Notification Title', 'Notification content...');
+//     notification_test.ondisplay = function() { ... do something ... };
+//     notification_test.onclose = function() { ... do something else ... };
+//     notification_test.show();
+//   } else {
+//     window.webkitNotifications.requestPermission();
+//   }
   
-}, false);
+// }, false);
+// </script>
 
 </body>
 
