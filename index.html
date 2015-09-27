@@ -21,7 +21,7 @@
 	<ol style="font-weight: bold; font-size: 16px;">
 	<div class="col span_1_of_4">
 
-	Friend's IDs
+	Friend IDs
 
 
 	<div class="friendlist">
@@ -31,17 +31,16 @@
 
 	<div class="col span_1_of_4">
 
-	Date of Last Chat
+	Days Since Last Chat
+	<ul id="timeBefore"></ul>
 
-	<div class="friendlist">
-	<ul id="time"></ul>
-	</div>
+	
 	</div>
 	<div class="col span_1_of_4">
 
 
 	Time Before Prompting
-	<ul id="timeBefore"></ul>
+	<ul id="time"></ul>
 
 
 	</div>
@@ -105,6 +104,9 @@ for (var j = 0; j < array.length; j++) {
 /*global newFriend*/
 var newFriend;
 
+/*global newTime */
+var newTime = [];
+var lastTime = [];
 /*global array*/
 var array = [];
 
@@ -118,9 +120,7 @@ var numDays;
 var time = []
 
 function addFriend() {
-
 	var newHTML = [];
-
     newFriend = prompt("Enter the Facebook id of the person you would like to add, usually firstname.lastname.#, and found at the end of the url of their profile.", "Their Facebook id...");
    	array.push(newFriend);
    	array.push("<br>")
@@ -131,6 +131,7 @@ function addFriend() {
     writeList(array, "demo");
     console.log(array);
     displayTime();
+    displaySinceChat();
     // for (var i = 0; i < array.length; i++) {
     //     document.getElementById("demo").innerHTML = array[i];
     //  }
@@ -138,16 +139,29 @@ function addFriend() {
 }
 
 function displayTime() {
-	//should be 24*60*60 but changed for demo
 	var newHTMLtime = [];
-	var newHTMLtimeBefore = [];
-	newTime = numDays;
+	newTime = promptsForDays();
 	time.push(newTime);
 	time.push("<br>");
-	promptsForDays()
-	writeList(time, "time");
-	writeList(time, "timeBefore");
+	
+	for (var i = -1; i < time.length; i++) {
+       newHTMLtime.push('<li>' + time[i] + '</li>');
+    }
+    writeList(time, "time");
+    console.log(time);
+	return newTime;
 }
+
+function displaySinceChat() {
+	
+	for (var i = 0; i < newTime.length; i++) {
+		lastTime.push('<li>' + timeConverter(1443359671-((23*60*60)*time[i])) + '</li>');
+	}
+	writeList(lastTime, "timeBefore");
+  console.log(lastTime);
+	return lastTime;
+}
+
 
 function writeList(listToWrite, tag) {
 	string = listToWrite.toString();

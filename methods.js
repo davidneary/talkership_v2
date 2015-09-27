@@ -13,13 +13,16 @@ function killFriend() {
     if (indexRemove > -1) {
         array.splice(indexRemove, 1);
     }
-    document.getElementById("demo").innerHTML = "";
+    for (var i = -1; i < array.length; i++) {
+       newHTML.push('<li>' + array[i] + '</li>');
+    }
+    writeList(array, "demo");
+    console.log(array);
     console.log(array)
 }
 
 
 function promptsForDays() {
-    
     numDays = prompt("Please enter number of days before prompting", "Days...");
     UNIXnumDays = (24*60*60)*numDays;
     console.log("Send prompt in "+UNIXnumDays+" seconds");
