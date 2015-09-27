@@ -1,7 +1,3 @@
-function loadNewPage(site) {
-    window.location.href = site;
-    
-}
 
 function killFriend() {
     //remove friend from lovedFriends;
@@ -9,11 +5,14 @@ function killFriend() {
 
 }
 
+/*global var*/ 
+var lovedFriends = new Array();
+    lovedFriends = ["david.neary.52", "eris.he.7", "rania.glass"];
+    
 function addFriend() {
-    window.prompt("Please enter the name of the friend you would like to add", "New Friend's Name...");
-    //check to see if newFriend exists in allFriends[];
-    //add newFriend to lovedFriends;
-    //reload page;
+    var newFriend = window.prompt("Please enter the name of the friend you would like to add", "New Friend's Name...");
+    
+    lovedFriends.push(newFriend);
 }
 
 function setPromptTime() {
@@ -24,3 +23,16 @@ function setPromptTime() {
 function getLastInteraction() {
     //get and add the date of the last interaction between user and friend
 }
+
+function promptsForDays() {
+    var numDays = prompt("Please enter number of days before prompting", "Days...");
+    }
+    //convert numDays into MJD
+    //assign promptTime to friend
+
+
+function addFriend() {
+	var friend = prompt("Who would you like to add as a friend?", "Enter name here");
+	lovedFriends.push(friend);
+	console.log(lovedFriends)
+    }

@@ -3,18 +3,19 @@
 <title>talkership</title>
 <meta charset="UTF-8">
 <header>
+	<script src="methods.js"></script>
 	<link rel="stylesheet" type="text/css" href="style.css">
 </header>
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
-</head>
 
+<!--actual header-->
+</head>
+<!-- -->
 <div class="header">
   <img src="talkership.png" alt="talkership logo" style="width:50px; height:50px;">
   <h1>Welcome to your talkership. </h1>
 </div>
 
-<div class ng-repeat-start="friend in lovedFriends">
-
+<!-- second header section -->
 <div class="section group">
 	<ol style="font-weight: bold; font-size: 16px;">
 	<div class="col span_1_of_4">
@@ -30,55 +31,38 @@
 	    Kill Friend?
 	</div>
 </div>
+
+<!--friends list-->
 <div class="section group">
 	<div class="col span_1_of_4">
-	<ul = "Friends">
-	<li>John Cena</li>
-	<li>Joseph Schwartz</li>
-	<li>Andrea Lin</li>
-	<li>Anna Hart</li>
-	<li>Ryan Williams</li>
-	<li>Adam Flatts</li>
-	<li>Stephen Lee</li>
-	<li>Justin Keenan</li>
+	<ul ="lovedFriends">
+    
+    <script> 
+    /*global lovedFriends */
+    for (i= 0; i < lovedFriends.length; i++) {
+        document.write(lovedFriends[i] + "<br >");
+    }
+	</script>
+
+<!--add date of last contact here?-->	
 	</ul>
 	</div>
 	<div class="col span_1_of_4">
-	<ul = "FriendsTime">
-	<li>9/25/2015</li>
-	<li>9/25/2015</li>
-	<li>9/25/2015</li>
-	<li>9/25/2015</li>
-	<li>9/25/2015</li>
-	<li>9/25/2015</li>
-	<li>9/25/2015</li>
-	<li>9/25/2015</li>
-	</ul>
+
+<!--input time before notifs kick in-->
 	</div>
 	<div class="col span_1_of_4">
-	<button onclick ="setPromptTime();"> Set Prompt Time for "Friends" </button>
+	<button onclick = "promptsForDays()"> Set Prompt Time for "Friends" </button>
+	
+<!--remove people from lovedFriends-->
 	</div>
 	<div class="col span_1_of_4">
 		<button onclick ="killFriend()"> Kill "Friends"
 	    </button>
 	</div>
 </div>
-<div class="section group">
-	<div class="col span_1_of_4">
-	{{friend}}.getName();
-	</div>
-	<div class="col span_1_of_4">
-	{{friend}}.getLastContact();
-	</div>
-	<div class="col span_1_of_4">
-	<button onclick ="{{friend}}.setPromptTime();"> Set Prompt Time for {{friend}} </button>
-	</div>
-	<div class="col span_1_of_4">
-		<button onclick ="killFriend()"> Kill {{friend}}.getName()
-	    </button>
-	</div>
-</div>
-<button onclick = "methods.addFriend()"> Add new friend </button>
 
-<script src="/friendData.js"></script>
+<!--buttons!-->
+<button onclick = "addFriend()"> Add new friend </button>
+
 </html>
