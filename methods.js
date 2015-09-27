@@ -1,19 +1,22 @@
 
+    //remove friends helper function
+    Array.prototype.remove = function(value) {
+    var idx = this.indexOf(value);
+    if (idx != -1) {
+        return this.splice(idx, 1); // The second parameter is the number of elements to remove.
+    }
+    return false;
+    }
+
 function killFriend() {
-    //remove friend from lovedFriends;
+    var removeFriend =  prompt("Who would you like to remove as a friend?", "Jane Doe");
+    array.remove(removeFriend);
+    
+    
     //refresh the page so that the friend is no longer displayed
 
 }
 
-/*global var*/ 
-var lovedFriends = new Array();
-    lovedFriends = ["david.neary.52", "eris.he.7", "rania.glass"];
-    
-function addFriend() {
-    var newFriend = window.prompt("Please enter the name of the friend you would like to add", "New Friend's Name...");
-    
-    lovedFriends.push(newFriend);
-}
 
 function setPromptTime() {
     //prompt the user for the number of days they would like
@@ -30,9 +33,21 @@ function promptsForDays() {
     //convert numDays into MJD
     //assign promptTime to friend
 
+/*global array*/
+var array = [];
 
-function addFriend() {
-	var friend = prompt("Who would you like to add as a friend?", "Enter name here");
-	lovedFriends.push(friend);
-	console.log(lovedFriends)
-    }
+    
+    //math converter from UNIX
+    function timeConverter(UNIX_timestamp){
+        var a = new Date(UNIX_timestamp * 1000);
+        var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        var year = a.getFullYear();
+        var month = months[a.getMonth()];
+        var date = a.getDate();
+        var hour = a.getHours();
+        var min = a.getMinutes();
+        var sec = a.getSeconds();
+        var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+        return time;
+}
+    
