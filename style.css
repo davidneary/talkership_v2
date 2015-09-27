@@ -35,6 +35,11 @@ button {
  
 }
 
+.a {
+	border: 20px solid #18b6c9;
+	padding: 5px;
+}
+
 .header img {
   float: left;
   width: 20px;

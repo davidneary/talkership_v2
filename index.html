@@ -2,71 +2,65 @@
 <head>
 <title>talkership</title>
 <meta charset="UTF-8">
+<link rel="shortcut icon" href="talkershipFavicon.png" type="image/png">
 <header>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
 	<script src="methods.js"></script>
 	<link rel="stylesheet" type="text/css" href="style.css">
 </header>
 
-<!--actual header-->
+<!--close actual header-->
 </head>
-<!-- -->
+<!-- header section-->
 <div class="header">
   <img src="talkership.png" alt="talkership logo" style="width:50px; height:50px;">
   <h1>Welcome to your talkership. </h1>
 </div>
 
-<!-- second header section -->
+<!-- begin construction of page -->
 <div class="section group">
 	<ol style="font-weight: bold; font-size: 16px;">
 	<div class="col span_1_of_4">
+	
 	Friend's IDs
-	    <div class="friendlist">
-	    	<ul id="demo"></ul>
-	    </div>
+	
+	<div class="col span_1_of_4">
+    <button onclick = "addFriend()"> Add new friend </button>
+    </div>
+    
+	
+	<div class="friendlist">
+	   	<ul id="demo"></ul>
+	</div>
 	</div>
 	
 	<div class="col span_1_of_4">
+	
 	Date of Last Chat
-	<div class="dateList"> <ul id="time"></ul>
-	<div> <button onclick="notifyMe()">It's been too long!</button> </div>
+	<div class="col span_2_of_4">
+    <button onclick="notifyMe()">It's been too long!</button> 
+    </div>
+	
+	<div class="friendlist"> <ul id="time"></ul>
 	</div>
 	</div>
 	<div class="col span_1_of_4">
+	
 	Time Before Prompting
+	<ul id="timeBefore"></ul>
+	<div class="col span_2_of_4">
+    <button onclick = "promptsForDays()"> Set Prompt Time for "Friends" </button>
+    </div>
 	
 	</div>
 	<div class="col span_1_of_4">
 	    Remove Friend?
+	    <div class="col span_1_of_4">
+        <button onclick ="killFriend()"> Remove "Friends" </button>
+        </div>
+
 	</div>
 	
-	<script>
-	var newFriend;
-	/*global array*/
-	function addFriend() {
-	    newFriend = prompt("Enter the Facebook id of the person you would like to add, usually firstname.lastname.#, and found at the end of the url of their profile.", "Their Facebook id...");
-     	array.push(newFriend);
-	    var newHTML = [];
-        for (var i = -1; i < array.length; i++) {
-            newHTML.push('<li>' + array[i] + '</li>');
-        }
-        
-        console.log(array);
-        displayTime();
-        //document.write(newHTML)
-       // $(".element").html(newHTML.join(""));
-        for (var i = 0; i < array.length; i++) {
-            document.getElementById("demo").innerHTML = array[i]; 
-        }
-        return newFriend;
-	}
-	/* global UNIXnumDays */
-	function displayTime() {
-		document.getElementById("time").innerHTML = timeConverter((1234*(array[(array.length)-1].length)));
-	}
-	
-    
-</script>
+
 <script>
 /*global array*/
 var dateArray = [];
@@ -74,7 +68,71 @@ for (var j = 0; j < array.length; j++) {
 	dateArray.push(j+4);
 }
 </script>
+
+</div>
+
+<!--friends list-->
+<div class="section group">
+	<div class="col span_1_of_4">
+	<ul ="array">
+    
+ 
+<!--add date of last contact here?-->	
+	</ul>
+	</div>
+	<div class="col span_1_of_4">
+
+	</div>
+    </div>
+
+<!--buttons!-->
+
+
+
+
+
+<!--functions!-->
 <script>
+/*global newFriend*/
+var newFriend;
+
+/*global array*/
+var array = [];
+
+/*global string */
+var string;
+	
+function addFriend() {
+	
+	var newHTML = [];
+	
+    newFriend = prompt("Enter the Facebook id of the person you would like to add, usually firstname.lastname.#, and found at the end of the url of their profile.", "Their Facebook id...");
+   	array.push(newFriend);
+    
+    for (var i = -1; i < array.length; i++) {
+       newHTML.push('<li>' + array[i] + '</li>');
+    }
+    writeList();    
+    console.log(array);
+    displayTime();
+    // for (var i = 0; i < array.length; i++) {
+    //     document.getElementById("demo").innerHTML = array[i]; 
+    //  }
+    return newFriend;
+}
+	/* global numDays */
+function displayTime() {
+	//should be 24*60*60 but changed for demo
+	document.getElementById("time").innerHTML = timeConverter(1443347970-(numDays*23*60*60));
+	document.getElementById("timeBefore").innerHTML = promptsForDays();
+}
+	
+function writeList() {
+	string = array.toString();
+	document.getElementById("demo").innerHTML = string; 
+	return string;
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   if (Notification.permission !== "granted")
     Notification.requestPermission();
@@ -102,44 +160,4 @@ function notifyMe() {
 
 }
 </script>
-
-
-
-
-</div>
-
-<!--friends list-->
-<div class="section group">
-	<div class="col span_1_of_4">
-	<ul ="lovedFriends">
-    
-   <script> 
- //   var friends = [];
- //   var allFriends = localStorage.getItem(friends);
- //   console.log(localStorage.allFriends);
- //   for (var i= 0; i < allFriends.length; i++) {
- //       document.write(allFriends[i] + "<br >");
- //   }
-	// </script>
-
-<!--add date of last contact here?-->	
-	</ul>
-	</div>
-	<div class="col span_1_of_4">
-
-<!--input time before notifs kick in-->
-	</div>
-	<div class="col span_1_of_4">
-	<button onclick = "promptsForDays()"> Set Prompt Time for "Friends" </button>
-	
-<!--remove people from lovedFriends-->
-	</div>
-	<div class="col span_1_of_4">
-		<button onclick ="killFriend()"> Remove "Friends"
-	    </button>
-	</div>
-</div>
-
-<!--buttons!-->
-<button onclick = "addFriend()"> Add new friend </button>
 </html>

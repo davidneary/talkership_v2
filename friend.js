@@ -7,7 +7,7 @@ var lovedFriends = friendReader();
 //for each loved friend, initialize a friend with their variables
 for(i = 0; i < lovedFriends.length; i++) {
     this.name = friendReader()[i].name();
-    this.lastContact = friendReader()[i].lastContact();
+    this.lastContact = f  riendReader()[i].lastContact();
     this.promptTime = friendReader()[i].promptTime();
     
     
