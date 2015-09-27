@@ -20,46 +20,55 @@
 <div class="section group">
 	<ol style="font-weight: bold; font-size: 16px;">
 	<div class="col span_1_of_4">
-	
+
 	Friend's IDs
-	
-	<div class="col span_1_of_4">
-    <button onclick = "addFriend()"> Add new friend </button>
-    </div>
-    
-	
+
+
 	<div class="friendlist">
-	   	<ul id="demo"></ul>
+	<ul id="demo"></ul>
 	</div>
 	</div>
-	
+
 	<div class="col span_1_of_4">
-	
+
 	Date of Last Chat
-	<div class="col span_2_of_4">
-    <button onclick="notifyMe()">It's been too long!</button> 
-    </div>
-	
-	<div class="friendlist"> <ul id="time"></ul>
+
+	<div class="friendlist">
+	<ul id="time"></ul>
 	</div>
 	</div>
 	<div class="col span_1_of_4">
-	
+
+
 	Time Before Prompting
 	<ul id="timeBefore"></ul>
-	<div class="col span_2_of_4">
-    <button onclick = "promptsForDays()"> Set Prompt Time for "Friends" </button>
-    </div>
-	
+
+
 	</div>
 	<div class="col span_1_of_4">
 	    Remove Friend?
-	    <div class="col span_1_of_4">
-        <button onclick ="killFriend()"> Remove "Friends" </button>
-        </div>
 
 	</div>
-	
+
+	<div class="section group">
+	<div class="col span_1_of_4">
+    <button onclick = "addFriend()"> Add new friend </button>
+    </div>
+
+    <div class="col span_1_of_4">
+    <button onclick="notifyMe()">It's been too long!</button>
+    </div>
+
+    <div class="col span_1_of_4">
+    <button onclick = "promptsForDays()"> Set Prompt Time for "Friends" </button>
+    </div>
+
+    <div class="col span_1_of_4">
+    <button onclick ="killFriend()"> Remove "Friends" </button>
+    </div>
+
+	</div>
+
 
 <script>
 /*global array*/
@@ -75,9 +84,9 @@ for (var j = 0; j < array.length; j++) {
 <div class="section group">
 	<div class="col span_1_of_4">
 	<ul ="array">
-    
- 
-<!--add date of last contact here?-->	
+
+
+<!--add date of last contact here?-->
 	</ul>
 	</div>
 	<div class="col span_1_of_4">
@@ -101,35 +110,48 @@ var array = [];
 
 /*global string */
 var string;
-	
+
+/* global numDays */
+var numDays;
+
+/*global time*/
+var time = []
+
 function addFriend() {
-	
+
 	var newHTML = [];
-	
+
     newFriend = prompt("Enter the Facebook id of the person you would like to add, usually firstname.lastname.#, and found at the end of the url of their profile.", "Their Facebook id...");
    	array.push(newFriend);
-    
+   	array.push("<br>")
+
     for (var i = -1; i < array.length; i++) {
        newHTML.push('<li>' + array[i] + '</li>');
     }
-    writeList();    
+    writeList(array, "demo");
     console.log(array);
     displayTime();
     // for (var i = 0; i < array.length; i++) {
-    //     document.getElementById("demo").innerHTML = array[i]; 
+    //     document.getElementById("demo").innerHTML = array[i];
     //  }
     return newFriend;
 }
-	/* global numDays */
+
 function displayTime() {
 	//should be 24*60*60 but changed for demo
-	document.getElementById("time").innerHTML = timeConverter(1443347970-(numDays*23*60*60));
-	document.getElementById("timeBefore").innerHTML = promptsForDays();
+	var newHTMLtime = [];
+	var newHTMLtimeBefore = [];
+	newTime = numDays;
+	time.push(newTime);
+	time.push("<br>");
+	promptsForDays()
+	writeList(time, "time");
+	writeList(time, "timeBefore");
 }
-	
-function writeList() {
-	string = array.toString();
-	document.getElementById("demo").innerHTML = string; 
+
+function writeList(listToWrite, tag) {
+	string = listToWrite.toString();
+	document.getElementById(tag).innerHTML = string;
 	return string;
 }
 
@@ -140,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function notifyMe() {
   if (!Notification) {
-    alert('Desktop notifications not available in your browser. Try Chromium.'); 
+    alert('Desktop notifications not available in your browser. Try Chromium.');
     return;
   }
 
@@ -149,15 +171,26 @@ function notifyMe() {
   else {
     var notification = new Notification('3..2..1.. PING!', {
       icon: 'smalltalkership.png',
-      body: "It's been a while since you've messaged {{newFriend}}. You should drop them a line."
+      body: "It's been a while since you've messaged "+ newFriend + ". You should drop them a line."
     });
 
     notification.onclick = function () {
-      window.open("http://facebook.com/messages/"+newFriend);      
+      window.open("http://facebook.com/messages/"+newFriend);
     };
 
   }
 
 }
+
+
 </script>
 </html>
+
+<!--name
+	var newArray = array[0].map(function(col, i) {
+  		return array.map(function(row) {
+    	return row[i]
+  	})
+	});
+
+	-->

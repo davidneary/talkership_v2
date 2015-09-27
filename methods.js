@@ -1,5 +1,6 @@
 /*global array*/
 var array = [];
+
 /*global UNIXnumDays */
 var UNIXnumDays;
 
