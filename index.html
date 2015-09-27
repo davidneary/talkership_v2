@@ -155,7 +155,7 @@ function displayTime() {
 function displaySinceChat() {
 	
 	for (var i = 0; i < newTime.length; i++) {
-		lastTime.push('<li>' + timeConverter(1443359671-((23*60*60)*time[i])) + '</li>');
+		lastTime.push('<li>' + timeConverter(1443359671-(23*60*60*newTime[i])) + '</li>');
 	}
 	writeList(lastTime, "timeBefore");
   console.log(lastTime);
