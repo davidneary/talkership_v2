@@ -29,18 +29,15 @@ function getLastInteraction() {
 }
 /*global UNIXnumDays */
 var UNIXnumDays;
+var numDays;
 function promptsForDays() {
     
-    var numDays = prompt("Please enter number of days before prompting", "Days...");
-    UNIXnumDays = (24*60*60)*numDays;
+    numDays = prompt("Please enter number of days before prompting", "Days...");
+    UNIXnumDays = (24)*numDays;
     console.log("Send prompt in "+UNIXnumDays+" seconds");
-    return UNIXnumDays;
+    return numDays;
 }
-    //convert numDays into MJD
-    //assign promptTime to friend
-
-
-
+    
     
     //math converter from UNIX
     function timeConverter(UNIX_timestamp){
@@ -52,7 +49,7 @@ function promptsForDays() {
         var hour = a.getHours();
         var min = a.getMinutes();
         var sec = a.getSeconds();
-        var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+        var time = date + ' ' + month;
         return time;
 }
 

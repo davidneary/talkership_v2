@@ -20,34 +20,37 @@
 <div class="section group">
 	<ol style="font-weight: bold; font-size: 16px;">
 	<div class="col span_1_of_4">
-	Friend Name
+	Friend's IDs
 	    <div class="friendlist">
 	    	<ul id="demo"></ul>
 	    </div>
 	</div>
 	
 	<div class="col span_1_of_4">
-	Date of Last Contact
+	Date of Last Chat
 	<div class="dateList"> <ul id="time"></ul>
+	<div> <button onclick="notifyMe()">It's been too long!</button> </div>
 	</div>
 	</div>
 	<div class="col span_1_of_4">
 	Time Before Prompting
-	<button onclick="notifyMe()">It's been too long!</button>
+	
 	</div>
 	<div class="col span_1_of_4">
 	    Remove Friend?
 	</div>
 	
 	<script>
+	var newFriend;
 	/*global array*/
 	function addFriend() {
-	    var newFriend = prompt("Who would you like to add as a friend?", "New friend...");
+	    newFriend = prompt("Enter the Facebook id of the person you would like to add, usually firstname.lastname.#, and found at the end of the url of their profile.", "Their Facebook id...");
      	array.push(newFriend);
 	    var newHTML = [];
         for (var i = -1; i < array.length; i++) {
             newHTML.push('<li>' + array[i] + '</li>');
         }
+        
         console.log(array);
         displayTime();
         //document.write(newHTML)
@@ -55,11 +58,11 @@
         for (var i = 0; i < array.length; i++) {
             document.getElementById("demo").innerHTML = array[i]; 
         }
-        
+        return newFriend;
 	}
 	/* global UNIXnumDays */
 	function displayTime() {
-		document.getElementById("time").innerHTML = (1234*(array[(array.length)-1].length))+" seconds";
+		document.getElementById("time").innerHTML = timeConverter((1234*(array[(array.length)-1].length)));
 	}
 	
     
@@ -88,11 +91,11 @@ function notifyMe() {
   else {
     var notification = new Notification('3..2..1.. PING!', {
       icon: 'smalltalkership.png',
-      body: "It's been a while since you've messaged your friend. You should drop them a line."
+      body: "It's been a while since you've messaged {{newFriend}}. You should drop them a line."
     });
 
     notification.onclick = function () {
-      window.open("http://facebook.com/messages");      
+      window.open("http://facebook.com/messages/"+newFriend);      
     };
 
   }
