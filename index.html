@@ -39,7 +39,7 @@
 	<div class="col span_1_of_4">
 
 
-	Time Before Prompting
+	Days Before Prompting
 	<ul id="time"></ul>
 
 
@@ -59,11 +59,11 @@
     </div>
 
     <div class="col span_1_of_4">
-    <button onclick = "promptsForDays()"> Set Prompt Time for "Friends" </button>
+    <!--<button onclick = "promptsForDays()"> Set Prompt Time for "Friends" </button>-->
     </div>
 
     <div class="col span_1_of_4">
-    <button onclick ="killFriend()"> Remove "Friends" </button>
+    <button onclick ="killFriend()"> Remove friend </button>
     </div>
 
 	</div>
@@ -99,14 +99,18 @@ for (var j = 0; j < array.length; j++) {
 
 
 
-<!--functions!-->
 <script>
+/*global variable declarations */
+
 /*global newFriend*/
 var newFriend;
 
 /*global newTime */
 var newTime = [];
+
+/* global lastTime */
 var lastTime = [];
+
 /*global array*/
 var array = [];
 
@@ -117,9 +121,12 @@ var string;
 var numDays;
 
 /*global time*/
-var time = []
+var time = [];
 
+
+ /* functions */
 function addFriend() {
+    console.log("called addFriend()");
 	var newHTML = [];
     newFriend = prompt("Enter the Facebook id of the person you would like to add, usually firstname.lastname.#, and found at the end of the url of their profile.", "Their Facebook id...");
    	array.push(newFriend);
@@ -132,15 +139,17 @@ function addFriend() {
     console.log(array);
     displayTime();
     displaySinceChat();
-    // for (var i = 0; i < array.length; i++) {
-    //     document.getElementById("demo").innerHTML = array[i];
-    //  }
+   
     return newFriend;
 }
 
 function displayTime() {
+    console.log("called displayTime");
 	var newHTMLtime = [];
 	newTime = promptsForDays();
+	console.log("newTime = " + newTime);
+	setTimeout(notifyMe, numSeconds);
+	console.log(newTime*1000*60);
 	time.push(newTime);
 	time.push("<br>");
 	
@@ -152,10 +161,12 @@ function displayTime() {
 	return newTime;
 }
 
+//harvest the UNIX time from the inbox
 function displaySinceChat() {
+    console.log("called displaySinceChat()");
 	
 	for (var i = 0; i < newTime.length; i++) {
-		lastTime.push('<li>' + timeConverter(1443359671-(23*60*60*newTime[i])) + '</li>');
+		lastTime.push('<li>' + timeConverter(1443359671-(time[i])) + '</li>');
 	}
 	writeList(lastTime, "timeBefore");
   console.log(lastTime);
@@ -175,6 +186,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function notifyMe() {
+    console.log("called notifyMe()");
   if (!Notification) {
     alert('Desktop notifications not available in your browser. Try Chromium.');
     return;
@@ -185,7 +197,7 @@ function notifyMe() {
   else {
     var notification = new Notification('3..2..1.. PING!', {
       icon: 'smalltalkership.png',
-      body: "It's been a while since you've messaged "+ newFriend + ". You should drop them a line."
+      body: "It's been a while since you've messaged "+ newFriend + ". Click here to message them."
     });
 
     notification.onclick = function () {
@@ -194,6 +206,12 @@ function notifyMe() {
 
   }
 
+}
+
+function timer() {
+    for (var i = 0; i < newTime.length; i++) {
+        
+    }
 }
 
 
